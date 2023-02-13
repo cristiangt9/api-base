@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'admin.users';
+    protected $connection = 'admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +44,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var string
+     * @return bool
+     */
+    public function hasAccess($access)
+    {
+        return $this->accesses()->where("accesses.status", "ACTIVE")->where("name", $access)->count() > 0;
+    }
+
+    public function accesses()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'accesses_users',
+            'access_id',
+            'user_id'
+        );
+    }
 }

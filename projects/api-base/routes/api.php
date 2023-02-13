@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExampleController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,18 @@ Route::post('/', function () {
     return "Api running...";
 });
 
-Route::get('example', [ExampleController::class, "index"]);
+
+Route::group(
+    [
+        'prefix' => 'protected',
+        'middleware' =>['check.access']
+    ],
+    function () {
+        //insert all endpoints protected
+        Route::get('example', [ExampleController::class, "index"]);
+    }
+);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
