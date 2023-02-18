@@ -2,7 +2,7 @@
 
 namespace domo\Models\Logs;
 
-use App\Models\Admin\User
+use App\Models\Admin\User;
 use Illuminate\Database\Eloquent\Model;
 
 class LogDelete extends Model

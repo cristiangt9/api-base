@@ -16,16 +16,19 @@ class CustomModel extends Model
 		// static::addGlobalScope(new NoDeletedScope);
 	}
 
-	public function log_create() {
-		return $this->morphMany(Log_creacion::Class, 'log_creatable', 'tabla_clase', 'tabla_id', 'id');
+	public function logCreate()
+	{
+		return $this->morphMany(Log_creacion::Class, 'log_creatable', 'table_class', 'table_id', 'id');
 	}
 
-	public function log_edicion() {
-		return $this->morphMany(Log_edicion::Class, 'log_editable', 'tabla_clase', 'tabla_id', 'id');
+	public function logEdit()
+	{
+		return $this->morphMany(Log_edicion::Class, 'log_editable', 'table_class', 'table_id', 'id');
 	}
 
-	public function log_eliminacion() {
-		return $this->morphMany(Log_eliminacion::Class, 'log_eliminacionable', 'tabla_clase', 'tabla_id', 'id');
+	public function logDelete()
+	{
+		return $this->morphMany(Log_eliminacion::Class, 'log_deletable', 'table_class', 'table_id', 'id');
 	}
 
 
