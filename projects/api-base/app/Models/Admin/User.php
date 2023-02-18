@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Admin\Access;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,8 +14,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'admin.users';
     protected $connection = 'admin';
+    protected $table = 'admin.users';
 
     /**
      * The attributes that are mass assignable.
@@ -59,10 +61,10 @@ class User extends Authenticatable
     public function accesses()
     {
         return $this->belongsToMany(
-            User::class,
+            Access::class,
             'accesses_users',
-            'access_id',
-            'user_id'
+            'user_id',
+            'access_id'
         );
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('accesses', function (Blueprint $table) {
             $table->id();
+            $table->enum('status', ['ACTIVE', 'DELETED'])->default('ACTIVE');
             $table->string("name");
             $table->timestamps();
         });
